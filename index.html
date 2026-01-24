@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>My Garden
+    </title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <header>
+            <h1>My Garden</h1>
+            <p class="greeting">Привіт, Діано 👋</p>
+        </header>
+
+        <div class="summary-card">
+            <span id="status-text">Завантаження...</span>
+        </div>
+
+        <section>
+            <h2 class="section-title">Усі рослини</h2>
+            <div id="plants-container"></div>
+        </section>
+    </div>
+
+    <nav class="bottom-nav">
+        
+        <button class="add-btn-floating" onclick="toggleModal(true)">+</button>
+        
+    </nav>
+
+    <div id="modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>Нова рослина</h3>
+            <input type="text" id="plantName" placeholder="Назва (напр. Монстера)">
+            <input type="number" id="plantInterval" placeholder="Інтервал (днів)">
+            <div class="modal-buttons">
+                <button onclick="toggleModal(false)" class="btn-cancel">Скасувати</button>
+                <button onclick="addNewPlant()" class="btn-confirm">Додати</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+<div id="undo-bar" class="undo-bar">
+        <span>Оновлено! Помилково?</span>
+        <button class="undo-btn" onclick="undoWater()">Скасувати</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

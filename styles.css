@@ -1,0 +1,276 @@
+:root {
+    --bg-color: #f8faf9;
+    --text-main: #1a3c34;
+    --text-muted: #7d8a87;
+    --accent-green: #4caf7d;
+    --card-white: #ffffff;
+    --shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    padding: 20px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.app-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+}
+
+header h1 { font-size: 28px; margin: 0; }
+.greeting { color: var(--text-muted); margin-top: 5px; margin-bottom: 25px; }
+
+.summary-card {
+    background: white;
+    border: 1px dashed #d1d9d7;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--text-muted);
+    font-size: 15px;
+}
+
+.section-title { font-size: 18px; margin-bottom: 15px; }
+
+/* Картки рослин */
+.plant-card {
+    background: var(--card-white);
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+}
+
+.plant-icon {
+    width: 50px; height: 50px;
+    background: #f0f4f2;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-right: 15px;
+}
+
+.plant-info { flex-grow: 1; }
+.plant-info h3 { margin: 0; font-size: 17px; }
+.plant-info p { margin: 3px 0 0; font-size: 13px; color: var(--text-muted); }
+.next-date { color: var(--accent-green); font-weight: 600; }
+
+/* Кнопки */
+.btn-water {
+    background: #eef9f4; border: none;
+    width: 45px; height: 45px; border-radius: 12px;
+    color: var(--accent-green); cursor: pointer; font-size: 20px;
+}
+
+.btn-del {
+    background: none; border: none; color: #ddd;
+    margin-left: 10px; cursor: pointer; font-size: 18px;
+}
+
+/* Навігація */
+.bottom-nav {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    height: 80px; background: white;
+    display: flex; justify-content: space-around; align-items: center;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.03);
+}
+
+.nav-icon { font-size: 24px; cursor: pointer; opacity: 0.5; }
+
+.add-btn-floating {
+    width: 60px; height: 60px;
+    background: var(--accent-green);
+    border-radius: 50%; color: white; border: none;
+    font-size: 30px; margin-top: -45px;
+    box-shadow: 0 8px 15px rgba(76, 175, 125, 0.3);
+    cursor: pointer;
+}
+
+/* Модалка */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6); display: none;
+    align-items: center; justify-content: center; z-index: 1000;
+}
+
+.modal-content {
+    background: white; padding: 25px; border-radius: 24px;
+    width: 85%; max-width: 350px;
+}
+
+.modal-content h3 { margin-top: 0; }
+.modal-content input {
+    width: 100%; padding: 14px; margin: 10px 0;
+    border: 1px solid #eee; border-radius: 12px; box-sizing: border-box;
+    font-size: 16px; outline: none;
+}
+
+.modal-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 15px; }
+.btn-confirm { background: var(--accent-green); color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; }
+.btn-cancel { background: none; border: none; color: var(--text-muted); padding: 10px; cursor: pointer; }:root {
+    --bg-color: #f8faf9;
+    --text-main: #1a3c34;
+    --text-muted: #7d8a87;
+    --accent-green: #4caf7d;
+    --card-white: #ffffff;
+    --shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    padding: 20px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.app-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+}
+
+header h1 { font-size: 28px; margin: 0; }
+.greeting { color: var(--text-muted); margin-top: 5px; margin-bottom: 25px; }
+
+.summary-card {
+    background: white;
+    border: 1px dashed #d1d9d7;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--text-muted);
+    font-size: 15px;
+}
+
+.section-title { font-size: 18px; margin-bottom: 15px; }
+
+/* Картки рослин */
+.plant-card {
+    background: var(--card-white);
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+}
+
+.plant-icon {
+    width: 50px; height: 50px;
+    background: #f0f4f2;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-right: 15px;
+}
+
+.plant-info { flex-grow: 1; }
+.plant-info h3 { margin: 0; font-size: 17px; }
+.plant-info p { margin: 3px 0 0; font-size: 13px; color: var(--text-muted); }
+.next-date { color: var(--accent-green); font-weight: 600; }
+
+/* Кнопки */
+.btn-water {
+    background: #eef9f4; border: none;
+    width: 45px; height: 45px; border-radius: 12px;
+    color: var(--accent-green); cursor: pointer; font-size: 20px;
+}
+
+.btn-del {
+    background: none; border: none; color: #ddd;
+    margin-left: 10px; cursor: pointer; font-size: 18px;
+}
+
+/* Навігація */
+.bottom-nav {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    height: 80px; background: white;
+    display: flex; justify-content: space-around; align-items: center;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.03);
+}
+
+.nav-icon { font-size: 24px; cursor: pointer; opacity: 0.5; }
+
+.add-btn-floating {
+    width: 60px; height: 60px;
+    background: var(--accent-green);
+    border-radius: 50%; color: white; border: none;
+    font-size: 30px; margin-top: -45px;
+    box-shadow: 0 8px 15px rgba(76, 175, 125, 0.3);
+    cursor: pointer;
+}
+
+/* Модалка */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6); display: none;
+    align-items: center; justify-content: center; z-index: 1000;
+}
+
+.modal-content {
+    background: white; padding: 25px; border-radius: 24px;
+    width: 85%; max-width: 350px;
+}
+
+.modal-content h3 { margin-top: 0; }
+.modal-content input {
+    width: 100%; padding: 14px; margin: 10px 0;
+    border: 1px solid #eee; border-radius: 12px; box-sizing: border-box;
+    font-size: 16px; outline: none;
+}
+
+.modal-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 15px; }
+.btn-confirm { background: var(--accent-green); color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; }
+.btn-cancel { background: none; border: none; color: var(--text-muted); padding: 10px; cursor: pointer; }
+/* Поле вибору дати всередині картки (приховане, активується при натисканні) */
+.edit-date {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 11px;
+    font-family: inherit;
+    cursor: pointer;
+    margin-top: 4px;
+    display: block;
+}
+
+/* Панель скасування (Undo) */
+.undo-bar {
+    position: fixed;
+    bottom: 90px;
+    left: 20px;
+    right: 20px;
+    background: #1a3c34;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transform: translateY(200px);
+    transition: transform 0.3s ease;
+    z-index: 999;
+}
+
+.undo-bar.show {
+    transform: translateY(0);
+}
+
+.undo-btn {
+    background: var(--accent-green);
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
