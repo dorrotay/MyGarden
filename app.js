@@ -15,6 +15,14 @@ function getNextDate(plant) {
     last.setDate(last.getDate() + (parseInt(plant.interval) || 7));
     return last;
 }
+function sendNotification(count) {
+    if (Notification.permission === "granted") {
+        new Notification("Час полити рослини! 🌿", {
+            body: `У вас прострочено полив для ${count} рослин.`,
+            icon: "https://cdn-icons-png.flaticon.com/512/628/628283.png"
+        });
+    }
+}
 
 window.render = function() {
     const container = document.getElementById("plants-container");
@@ -31,14 +39,18 @@ window.render = function() {
         const today = new Date();
         today.setHours(0,0,0,0);
         
-        if (today >= nextDate) overdueCount++;
+        // Визначаємо, чи прострочено полив
+        const isOverdue = today >= nextDate;
+        if (isOverdue) overdueCount++;
 
         const formattedDate = nextDate.toLocaleDateString('uk-UA', { month: 'short', day: 'numeric' });
 
         const card = document.createElement("div");
-        card.className = "plant-card";
+        // ДОДАЄМО КЛАС overdue ЯКЩО ПОТРІБНО
+        card.className = `plant-card ${isOverdue ? 'overdue' : ''}`;
+        
         card.innerHTML = `
-            <div class="plant-icon">🌿</div>
+            <div class="plant-icon">${isOverdue ? '⚠️' : '🌿'}</div>
             <div class="plant-info">
                 <h3>${plant.name}</h3>
                 <p>Наступний: <span class="next-date">${formattedDate}</span></p>
@@ -49,11 +61,20 @@ window.render = function() {
         `;
         container.appendChild(card);
     });
+    
 
     statusText.innerText = overdueCount > 0 
         ? `Потрібно полити: ${overdueCount}` 
         : "Всі рослини в порядку! ✨";
-
+// ... в кінці функції window.render перед localStorage.setItem
+if (overdueCount > 0) {
+    // Відправляємо нотифікацію тільки якщо кількість змінилася або додаток щойно відкрили
+    // Щоб не "спамити" при кожному кліку, можна додати перевірку
+    if (!window.notifiedCount || window.notifiedCount !== overdueCount) {
+        sendNotification(overdueCount);
+        window.notifiedCount = overdueCount;
+    }
+}
     localStorage.setItem(STORAGE_KEY, JSON.stringify(plants));
 }
 window.addNewPlant = function() {
@@ -107,6 +128,12 @@ window.water = function(id) {
         plants[plantIndex].lastWatered = new Date().toISOString().slice(0, 10);
         render();
         showUndoBar();
+    }
+}
+// Запит дозволу на нотифікації при завантаженні
+if ("Notification" in window) {
+    if (Notification.permission !== "granted" && Notification.permission !== "denied") {
+        Notification.requestPermission();
     }
 }
 

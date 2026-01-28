@@ -274,3 +274,27 @@ header h1 { font-size: 28px; margin: 0; }
     font-weight: bold;
     cursor: pointer;
 }
+/* Стиль для картки, яку прострочено */
+.plant-card.overdue {
+    border: 1px solid rgba(220, 38, 38, 0.3);
+    background: #fffcfc; /* Дуже легкий рожевий відтінок фону */
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.08); /* М'яка червона тінь */
+}
+
+/* Колір дати, коли вона прострочена */
+.overdue-text {
+    color: #dc2626; /* Яскравий червоний */
+    font-weight: 700;
+}
+
+/* Пульсація для іконки ⚠️, щоб привернути увагу */
+.plant-card.overdue .plant-icon {
+    background: #fee2e2;
+    animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
