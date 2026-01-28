@@ -73,7 +73,7 @@ window.render = function() {
         const card = document.createElement("div");
         card.className = `plant-card ${isOverdue ? 'overdue' : ''}`;
         card.innerHTML = `
-            <div class="plant-icon">${isOverdue ? '⚠️' : '🌿'}</div>
+            <div class="plant-icon">${isOverdue ? '🥀' : '🌿'}</div>
             <div class="plant-info">
                 <h3>${plant.name}</h3>
                 <p>Наступний: <span class="next-date">${formattedDate}</span></p>
