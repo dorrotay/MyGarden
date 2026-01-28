@@ -1,11 +1,45 @@
 const STORAGE_KEY = "plants-data";
 let lastAction = null; // Для зберігання стану перед останнім поливом
 
+// 1. ЗАВАНТАЖЕННЯ ДАНИХ
 let plants = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [
     { id: 1, name: "Монстера", interval: 5, lastWatered: "2026-01-20" },
     { id: 2, name: "Фікус", interval: 7, lastWatered: "2026-01-18" }
 ];
 
+// 2. ЛОГІКА НОТИФІКАЦІЙ (iOS 16.4+)
+window.requestNotificationPermission = function() {
+    if (!("Notification" in window)) {
+        alert("Цей браузер не підтримує сповіщення");
+        return;
+    }
+
+    Notification.requestPermission().then(permission => {
+        if (permission === "granted") {
+            alert("Сповіщення увімкнено! ✨");
+            const btn = document.getElementById("enable-notifications");
+            if (btn) btn.style.display = "none";
+            
+            new Notification("My Garden", { 
+                body: "Тепер ви отримуватимете нагадування про полив.",
+                icon: "https://cdn-icons-png.flaticon.com/512/628/628283.png"
+            });
+        } else if (permission === "denied") {
+            alert("Ви заблокували сповіщення. Будь ласка, дозвольте їх у налаштуваннях iPhone (Параметри -> My Garden).");
+        }
+    });
+}
+
+function sendNotification(count) {
+    if (Notification.permission === "granted") {
+        new Notification("Час полити рослини! 🌿", {
+            body: `У вас прострочено полив для ${count} рослин.`,
+            icon: "https://cdn-icons-png.flaticon.com/512/628/628283.png"
+        });
+    }
+}
+
+// 3. ОСНОВНІ ФУНКЦІЇ
 window.toggleModal = function(show) {
     document.getElementById("modal").style.display = show ? "flex" : "none";
 }
@@ -14,14 +48,6 @@ function getNextDate(plant) {
     const last = new Date(plant.lastWatered);
     last.setDate(last.getDate() + (parseInt(plant.interval) || 7));
     return last;
-}
-function sendNotification(count) {
-    if (Notification.permission === "granted") {
-        new Notification("Час полити рослини! 🌿", {
-            body: `У вас прострочено полив для ${count} рослин.`,
-            icon: "https://cdn-icons-png.flaticon.com/512/628/628283.png"
-        });
-    }
 }
 
 window.render = function() {
@@ -39,16 +65,13 @@ window.render = function() {
         const today = new Date();
         today.setHours(0,0,0,0);
         
-        // Визначаємо, чи прострочено полив
         const isOverdue = today >= nextDate;
         if (isOverdue) overdueCount++;
 
         const formattedDate = nextDate.toLocaleDateString('uk-UA', { month: 'short', day: 'numeric' });
 
         const card = document.createElement("div");
-        // ДОДАЄМО КЛАС overdue ЯКЩО ПОТРІБНО
         card.className = `plant-card ${isOverdue ? 'overdue' : ''}`;
-        
         card.innerHTML = `
             <div class="plant-icon">${isOverdue ? '⚠️' : '🌿'}</div>
             <div class="plant-info">
@@ -61,22 +84,28 @@ window.render = function() {
         `;
         container.appendChild(card);
     });
-    
 
     statusText.innerText = overdueCount > 0 
         ? `Потрібно полити: ${overdueCount}` 
         : "Всі рослини в порядку! ✨";
-// ... в кінці функції window.render перед localStorage.setItem
-if (overdueCount > 0) {
-    // Відправляємо нотифікацію тільки якщо кількість змінилася або додаток щойно відкрили
-    // Щоб не "спамити" при кожному кліку, можна додати перевірку
-    if (!window.notifiedCount || window.notifiedCount !== overdueCount) {
-        sendNotification(overdueCount);
-        window.notifiedCount = overdueCount;
+
+    // Перевірка для відправки нотифікації
+    if (overdueCount > 0) {
+        if (!window.notifiedCount || window.notifiedCount !== overdueCount) {
+            sendNotification(overdueCount);
+            window.notifiedCount = overdueCount;
+        }
+    }
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(plants));
+    
+    // Перевірка видимості кнопки нотифікацій
+    const notifyBtn = document.getElementById("enable-notifications");
+    if (notifyBtn) {
+        notifyBtn.style.display = (Notification.permission === "default") ? "block" : "none";
     }
 }
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(plants));
-}
+
 window.addNewPlant = function() {
     const nameInput = document.getElementById("plantName");
     const intervalInput = document.getElementById("plantInterval");
@@ -99,12 +128,9 @@ window.addNewPlant = function() {
     };
 
     plants.push(newPlant);
-    
-    // Очищуємо поля та закриваємо вікно
     nameInput.value = "";
     intervalInput.value = "";
     window.toggleModal(false);
-    
     render();
 }
 
@@ -115,11 +141,9 @@ window.deletePlant = function(id) {
     }
 }
 
-// Функція поливу з можливістю скасування
 window.water = function(id) {
     const plantIndex = plants.findIndex(p => p.id === id);
     if (plantIndex !== -1) {
-        // Зберігаємо копію для Undo
         lastAction = {
             index: plantIndex,
             oldDate: plants[plantIndex].lastWatered
@@ -130,14 +154,7 @@ window.water = function(id) {
         showUndoBar();
     }
 }
-// Запит дозволу на нотифікації при завантаженні
-if ("Notification" in window) {
-    if (Notification.permission !== "granted" && Notification.permission !== "denied") {
-        Notification.requestPermission();
-    }
-}
 
-// Скасування останньої дії
 window.undoWater = function() {
     if (lastAction) {
         plants[lastAction.index].lastWatered = lastAction.oldDate;
@@ -147,7 +164,6 @@ window.undoWater = function() {
     }
 }
 
-// Ручне редагування дати
 window.manualEdit = function(id, newDate) {
     const plant = plants.find(p => p.id === id);
     if (plant && newDate) {
@@ -158,15 +174,18 @@ window.manualEdit = function(id, newDate) {
 
 function showUndoBar() {
     const bar = document.getElementById("undo-bar");
-    bar.classList.add("show");
-    setTimeout(hideUndoBar, 5000); // Сховати через 5 секунд
+    if (bar) {
+        bar.classList.add("show");
+        setTimeout(hideUndoBar, 5000);
+    }
 }
 
 function hideUndoBar() {
-    document.getElementById("undo-bar").classList.remove("show");
+    const bar = document.getElementById("undo-bar");
+    if (bar) bar.classList.remove("show");
 }
 
-// ... інші функції (addNewPlant, deletePlant) без змін
+// 4. ІНІЦІАЛІЗАЦІЯ
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(err => console.log(err));
 }
