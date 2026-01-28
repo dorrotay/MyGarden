@@ -32,9 +32,18 @@ window.requestNotificationPermission = function() {
 
 function sendNotification(count) {
     if (Notification.permission === "granted") {
-        new Notification("Час полити рослини! 🌿", {
+        const options = {
             body: `У вас прострочено полив для ${count} рослин.`,
-            icon: "https://cdn-icons-png.flaticon.com/512/628/628283.png"
+            icon: "https://cdn-icons-png.flaticon.com/512/628/628283.png",
+            badge: "https://cdn-icons-png.flaticon.com/512/628/628283.png",
+            vibrate: [200, 100, 200],
+            tag: 'watering-alert', // Запобігає дублюванню
+            renotify: true // Змушує телефон реагувати знову
+        };
+
+        // Спроба відправити через Service Worker (це надійніше для iOS)
+        navigator.serviceWorker.ready.then(registration => {
+            registration.showNotification("Час полити рослини! 🌿", options);
         });
     }
 }
