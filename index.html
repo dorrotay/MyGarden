@@ -1,30 +1,25 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/628/628283.png">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>My Garden
-    </title>
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/628/628283.png">
+    <title>My Garden</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    
-
     <div class="app-container">
-        <header>
-            <h1>My Garden</h1>
-            <p class="greeting">Привіт 👋</p>
+        <header style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+                <h1>My Garden</h1>
+                <p class="greeting">Привіт 👋</p>
+            </div>
+            <button class="history-log-btn" onclick="toggleHistoryModal(true)">📋</button>
         </header>
-<button id="enable-notifications" onclick="requestNotificationPermission()" style="display:none; background: #eef9f4; border: 1px solid #4caf7d; color: #4caf7d; padding: 10px; border-radius: 12px; width: 100%; margin-bottom: 20px;">
-    🔔 Увімкнути сповіщення
-</button>
-        <div class="summary-card">
-            <span id="status-text">Завантаження...</span>
-        </div>
+
+        <div class="summary-card"><span id="status-text">Завантаження...</span></div>
 
         <section>
             <h2 class="section-title">Усі рослини</h2>
@@ -33,29 +28,55 @@
     </div>
 
     <nav class="bottom-nav">
-        
         <button class="add-btn-floating" onclick="toggleModal(true)">+</button>
-        
     </nav>
 
-    <div id="modal" class="modal-overlay">
+    <div id="modal" class="modal">
         <div class="modal-content">
-            <h3>Нова рослина</h3>
-            <input type="text" id="plantName" placeholder="Назва (напр. Монстера)">
-            <input type="number" id="plantInterval" placeholder="Інтервал (днів)">
+            <h2>Нова рослина</h2>
+            <div class="name-row">
+                <input type="text" id="plantEmoji" placeholder="🌿" style="width: 50px; text-align: center;">
+                <input type="text" id="plantName" placeholder="Назва">
+            </div>
+            
+            <div class="seasonal-inputs">
+                <p>💧 Полив (днів):</p>
+                <input type="number" id="intWinter" placeholder="❄️" min="1">
+                <input type="number" id="intSpring" placeholder="🌱" min="1">
+                <input type="number" id="intSummer" placeholder="☀️" min="1">
+                <input type="number" id="intAutumn" placeholder="🍂" min="1">
+            </div>
+
+            <div class="seasonal-inputs">
+                <p>🧪 Добриво (днів):</p>
+                <input type="number" id="fertWinter" placeholder="❄️" min="1">
+                <input type="number" id="fertSpring" placeholder="🌱" min="1">
+                <input type="number" id="fertSummer" placeholder="☀️" min="1">
+                <input type="number" id="fertAutumn" placeholder="🍂" min="1">
+            </div>
+
             <div class="modal-buttons">
-                <button onclick="toggleModal(false)" class="btn-cancel">Скасувати</button>
-                <button onclick="addNewPlant()" class="btn-confirm">Додати</button>
+                <button class="btn-save" onclick="addNewPlant()">Зберегти</button>
+                <button onclick="toggleModal(false)" class="btn-secondary">Скасувати</button>
             </div>
         </div>
     </div>
 
-    <script src="app.js"></script>
-<div id="undo-bar" class="undo-bar">
-        <span>Оновлено! Помилково?</span>
+    <div id="history-modal" class="modal">
+        <div class="modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3>Журнал подій</h3>
+                <button onclick="toggleHistoryModal(false)" style="background:none; border:none; font-size:20px;">✕</button>
+            </div>
+            <div id="global-history-list" class="history-scroll-area"></div>
+        </div>
+    </div>
+
+    <div id="undo-bar" class="undo-bar">
+        <span>Оновлено!</span>
         <button class="undo-btn" onclick="undoWater()">Скасувати</button>
     </div>
 
-    <script src="script.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

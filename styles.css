@@ -1,10 +1,16 @@
 :root {
-    --bg-color: #f8faf9;
-    --text-main: #1a3c34;
-    --text-muted: #7d8a87;
-    --accent-green: #4caf7d;
-    --card-white: #ffffff;
-    --shadow: 0 4px 12px rgba(0,0,0,0.03);
+    --primary-color: #4caf50;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-main: #2d3436;
+    --text-muted: #636e72;
+    --danger: #ff7675;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -12,289 +18,298 @@ body {
     background-color: var(--bg-color);
     color: var(--text-main);
     margin: 0;
-    padding: 20px;
-    -webkit-tap-highlight-color: transparent;
+    padding: env(safe-area-inset-top) 0 100px 0;
 }
 
 .app-container {
+    padding: 15px;
     max-width: 500px;
     margin: 0 auto;
-    padding-bottom: 100px;
 }
 
-header h1 { font-size: 28px; margin: 0; }
-.greeting { color: var(--text-muted); margin-top: 5px; margin-bottom: 25px; }
+/* ЗАГОЛОВКИ */
+h1 { font-size: 24px; margin: 0; }
+.greeting { font-size: 14px; color: var(--text-muted); margin: 2px 0 15px 0; }
+.section-title { font-size: 18px; margin: 20px 0 10px 0; }
 
-.summary-card {
-    background: white;
-    border: 1px dashed #d1d9d7;
-    border-radius: 16px;
-    padding: 20px;
-    text-align: center;
-    margin-bottom: 25px;
-    color: var(--text-muted);
-    font-size: 15px;
-}
-
-.section-title { font-size: 18px; margin-bottom: 15px; }
-
-/* Картки рослин */
+/* КАРТКИ РОСЛИН (КОМПАКТНІ) */
 .plant-card {
-    background: var(--card-white);
-    border-radius: 20px;
-    padding: 15px;
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 12px; /* Зменшено відступи */
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
-    margin-bottom: 12px;
+    gap: 12px;
     box-shadow: var(--shadow);
+    position: relative;
 }
 
 .plant-icon {
-    width: 50px; height: 50px;
-    background: #f0f4f2;
-    border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px; margin-right: 15px;
-}
-
-.plant-info { flex-grow: 1; }
-.plant-info h3 { margin: 0; font-size: 17px; }
-.plant-info p { margin: 3px 0 0; font-size: 13px; color: var(--text-muted); }
-.next-date { color: var(--accent-green); font-weight: 600; }
-
-/* Кнопки */
-.btn-water {
-    background: #eef9f4; border: none;
-    width: 45px; height: 45px; border-radius: 12px;
-    color: var(--accent-green); cursor: pointer; font-size: 20px;
-}
-
-.btn-del {
-    background: none; border: none; color: #ddd;
-    margin-left: 10px; cursor: pointer; font-size: 18px;
-}
-
-/* Навігація */
-.bottom-nav {
-    position: fixed; bottom: 0; left: 0; right: 0;
-    height: 80px; background: white;
-    display: flex; justify-content: space-around; align-items: center;
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.03);
-}
-
-.nav-icon { font-size: 24px; cursor: pointer; opacity: 0.5; }
-
-.add-btn-floating {
-    width: 60px; height: 60px;
-    background: var(--accent-green);
-    border-radius: 50%; color: white; border: none;
-    font-size: 30px; margin-top: -45px;
-    box-shadow: 0 8px 15px rgba(76, 175, 125, 0.3);
-    cursor: pointer;
-}
-
-/* Модалка */
-.modal-overlay {
-    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.6); display: none;
-    align-items: center; justify-content: center; z-index: 1000;
-}
-
-.modal-content {
-    background: white; padding: 25px; border-radius: 24px;
-    width: 85%; max-width: 350px;
-}
-
-.modal-content h3 { margin-top: 0; }
-.modal-content input {
-    width: 100%; padding: 14px; margin: 10px 0;
-    border: 1px solid #eee; border-radius: 12px; box-sizing: border-box;
-    font-size: 16px; outline: none;
-}
-
-.modal-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 15px; }
-.btn-confirm { background: var(--accent-green); color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; }
-.btn-cancel { background: none; border: none; color: var(--text-muted); padding: 10px; cursor: pointer; }:root {
-    --bg-color: #f8faf9;
-    --text-main: #1a3c34;
-    --text-muted: #7d8a87;
-    --accent-green: #4caf7d;
-    --card-white: #ffffff;
-    --shadow: 0 4px 12px rgba(0,0,0,0.03);
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    margin: 0;
-    padding: 20px;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.app-container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding-bottom: 100px;
-}
-
-header h1 { font-size: 28px; margin: 0; }
-.greeting { color: var(--text-muted); margin-top: 5px; margin-bottom: 25px; }
-
-.summary-card {
-    background: white;
-    border: 1px dashed #d1d9d7;
-    border-radius: 16px;
-    padding: 20px;
-    text-align: center;
-    margin-bottom: 25px;
-    color: var(--text-muted);
-    font-size: 15px;
-}
-
-.section-title { font-size: 18px; margin-bottom: 15px; }
-
-/* Картки рослин */
-.plant-card {
-    background: var(--card-white);
-    border-radius: 20px;
-    padding: 15px;
+    font-size: 32px;
+    background: #f0f7f4;
+    width: 70px; /* Зменшено з 50px */
+    height: 92px;
     display: flex;
     align-items: center;
-    margin-bottom: 12px;
-    box-shadow: var(--shadow);
-}
-
-.plant-icon {
-    width: 50px; height: 50px;
-    background: #f0f4f2;
-    border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px; margin-right: 15px;
+    justify-content: center;
+    border-radius: 10px;
 }
 
 .plant-info { flex-grow: 1; }
-.plant-info h3 { margin: 0; font-size: 17px; }
-.plant-info p { margin: 3px 0 0; font-size: 13px; color: var(--text-muted); }
-.next-date { color: var(--accent-green); font-weight: 600; }
+.plant-info h3 { margin: 0 0 2px 0; font-size: 18px; }
 
-/* Кнопки */
-.btn-water {
-    background: #eef9f4; border: none;
-    width: 45px; height: 45px; border-radius: 12px;
-    color: var(--accent-green); cursor: pointer; font-size: 20px;
+.season-badge {
+    display: inline-block;
+    font-size: 12px;
+    background: #eef9f4;
+    color: var(--primary-color);
+    padding: 1px 6px;
+    border-radius: 8px;
+    margin-bottom: 4px;
 }
 
-.btn-del {
-    background: none; border: none; color: #ddd;
-    margin-left: 10px; cursor: pointer; font-size: 18px;
-}
+.plant-info p { margin: 2px 0; font-size: 13px; color: var(--text-muted); }
+.next-date { font-weight: 600; color: var(--primary-color); }
 
-/* Навігація */
-.bottom-nav {
-    position: fixed; bottom: 0; left: 0; right: 0;
-    height: 80px; background: white;
-    display: flex; justify-content: space-around; align-items: center;
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.03);
-}
-
-.nav-icon { font-size: 24px; cursor: pointer; opacity: 0.5; }
-
-.add-btn-floating {
-    width: 60px; height: 60px;
-    background: var(--accent-green);
-    border-radius: 50%; color: white; border: none;
-    font-size: 30px; margin-top: -45px;
-    box-shadow: 0 8px 15px rgba(76, 175, 125, 0.3);
-    cursor: pointer;
-}
-
-/* Модалка */
-.modal-overlay {
-    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.6); display: none;
-    align-items: center; justify-content: center; z-index: 1000;
-}
-
-.modal-content {
-    background: white; padding: 25px; border-radius: 24px;
-    width: 85%; max-width: 350px;
-}
-
-.modal-content h3 { margin-top: 0; }
-.modal-content input {
-    width: 100%; padding: 14px; margin: 10px 0;
-    border: 1px solid #eee; border-radius: 12px; box-sizing: border-box;
-    font-size: 16px; outline: none;
-}
-
-.modal-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 15px; }
-.btn-confirm { background: var(--accent-green); color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; }
-.btn-cancel { background: none; border: none; color: var(--text-muted); padding: 10px; cursor: pointer; }
-/* Поле вибору дати всередині картки (приховане, активується при натисканні) */
 .edit-date {
+    border: none;
+    font-size: 12px;
+    color: #b2bec3;
+    background: none;
+    padding: 0;
+}
+
+/* КНОПКИ ДІЙ */
+.btn-water {
+    background: #e3f2fd;
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    font-size: 22px;
+    color: #2196f3;
+}
+
+.btn-del {
+    position: absolute;
+    right: 12px;
+    bottom: 82px;
     background: none;
     border: none;
-    color: var(--text-muted);
-    font-size: 11px;
-    font-family: inherit;
-    cursor: pointer;
-    margin-top: 4px;
-    display: block;
+    color: #d8dfe2;
+    font-size: 12px;
+    padding: 5px;
 }
 
-/* Панель скасування (Undo) */
+/* МОДАЛЬНЕ ВІКНО (ФОРМА 2х2) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(3px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 340px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.modal h2 { font-size: 18px; margin-top: 0; }
+
+.modal input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #f1f2f6;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    background: #fdfdfd;
+}
+
+/* СІТКА СЕЗОНІВ */
+.seasonal-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Дві колонки */
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.seasonal-inputs p {
+    grid-column: span 2;
+    margin: 0;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.seasonal-inputs input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #f1f2f6;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.modal-buttons { display: flex; gap: 8px; }
+.modal-buttons button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.btn-save { background: var(--primary-color); color: white; }
+.btn-secondary { background: #f1f2f6; color: var(--text-muted); }
+
+/* НИЖНЯ ПАНЕЛЬ */
+.bottom-nav {
+    position: fixed;
+    bottom: 0; left: 0; width: 100%;
+    height: 70px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    padding-bottom: env(safe-area-inset-bottom);
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.03);
+}
+
+.add-btn-floating {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 24px;
+    margin-top: -25px;
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+
+/* Повертаємо дизайн кнопки скасувати */
 .undo-bar {
     position: fixed;
     bottom: 90px;
     left: 20px;
     right: 20px;
-    background: #1a3c34;
+    background: #323232;
     color: white;
     padding: 12px 20px;
     border-radius: 12px;
-    display: flex;
+    display: none; /* Ховаємо за замовчуванням */
     justify-content: space-between;
     align-items: center;
-    transform: translateY(200px);
-    transition: transform 0.3s ease;
-    z-index: 999;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    z-index: 10000;
 }
 
 .undo-bar.show {
-    transform: translateY(0);
+    display: flex !important;
+    animation: slideUp 0.3s ease-out;
 }
 
 .undo-btn {
-    background: var(--accent-green);
-    border: none;
+    background: #4caf50;
     color: white;
-    padding: 6px 12px;
+    border: none;
+    padding: 6px 14px;
     border-radius: 8px;
     font-weight: bold;
+    font-size: 13px;
     cursor: pointer;
 }
-/* Стиль для картки, яку прострочено */
 .plant-card.overdue {
-    border: 1px solid rgba(220, 38, 38, 0.3);
-    background: #fffcfc; /* Дуже легкий рожевий відтінок фону */
-    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.08); /* М'яка червона тінь */
+    border-left: 5px solid #ff7675; /* Червона лінія збоку */
+    background-color: #fff5f5; /* Легкий червоний фон */
 }
 
-/* Колір дати, коли вона прострочена */
-.overdue-text {
-    color: #dc2626; /* Яскравий червоний */
-    font-weight: 700;
+.plant-card.overdue .next-date {
+    color: #ff7675;
+    font-weight: bold;
 }
 
-/* Пульсація для іконки ⚠️, щоб привернути увагу */
-.plant-card.overdue .plant-icon {
-    background: #fee2e2;
-    animation: pulse-red 2s infinite;
+/* Стилі для міні-календарів */
+.date-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 2px 0;
 }
 
-@keyframes pulse-red {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+.edit-date-mini {
+    border: none;
+    background: none;
+    width: 16px; /* Показує тільки іконку календаря в багатьох браузерах */
+    height: 16px;
+    cursor: pointer;
+    opacity: 0.5;
+    padding: 0;
+}
+
+.edit-date-mini:hover {
+    opacity: 1;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+/* Кнопка журналу */
+.history-log-btn {
+    background: white; border: none; width: 42px; height: 42px;
+    border-radius: 12px; box-shadow: var(--shadow); font-size: 20px;
+}
+
+/* Компактна сітка сезонів */
+.seasonal-inputs {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 6px; margin-top: 15px;
+}
+.seasonal-inputs p { grid-column: span 4; margin: 0; font-size: 12px; font-weight: 600; }
+.seasonal-inputs input { padding: 8px 2px !important; text-align: center; font-size: 12px; }
+
+/* Картка */
+.history-preview { font-size: 10px; color: #999; display: block; margin-top: 2px; }
+.btn-fert { background: #fff9db; border: none; border-radius: 8px; width: 42px; height: 42px; font-size: 22px; margin-top: 5px; }
+
+/* Список історії */
+.history-scroll-area { max-height: 60vh; overflow-y: auto; }
+.history-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 13px; }
+.history-item small { color: #888; font-size: 11px; }
+
+.name-row { display: flex; gap: 10px; margin-bottom: 15px; }
+.name-row input#plantName { flex: 1; margin: 0; }
+.plant-card.overdue {
+    border-left: 6px solid #ff7675;
+    background-color: #fff5f5;
+}
+
+/* Пріоритет 2: Прострочене добриво (Помаранчевий) */
+.plant-card.fert-overdue {
+    border-left: 6px solid #ff9800;
+    background-color: #fffaf0;
+}
+
+.alert-text {
+    color: #d63031;
+    font-weight: bold;
+    animation: blink 2s infinite;
+}
+
+.alert-text-fert {
+    color: #e67e22;
+    text-decoration: underline;
+}
+
+@keyframes blink {
+    50% { opacity: 0.6; }
 }
